@@ -1,0 +1,23 @@
+
+# Turn rewrite engine on
+Options +FollowSymlinks
+# Set the default handler.
+DirectoryIndex index.php
+RewriteEngine on
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+#All php files return JSON formatted text.
+AddType application/json json php
+#php_value default_mimetype application/json
+
+# map neat URL to internal URL 
+RewriteRule ^ping/?$   EpcxController.php?view=ping [NC,qsa]
+#
+# refresh-token
+RewriteRule ^login/?$   EpcxController.php?view=login [NC,qsa]
+RewriteRule ^jwtrefresh/?$   EpcxController.php?view=refreshtoken [NC,qsa]
+RewriteRule ^epcx-user-save/?$   EpcxController.php?view=epcx-user-save [NC,qsa]
+RewriteRule ^epcx-pwd-change/?$   EpcxController.php?view=epcx-pwd-change [NC,qsa]
+RewriteRule ^epcx-sign-up/?$   EpcxController.php?view=epcx-sign-up [NC,qsa]
+
+
